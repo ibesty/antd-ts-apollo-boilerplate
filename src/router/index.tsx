@@ -64,11 +64,12 @@ export let routes: IRoute[] = [
 
 function RouteWithSubRoutes(route:IRoute) {
     const children = (
-        <Switch>
+        <Switch key={route.path}>
             <Suspense fallback={<PageLoading/>}>
                 {
                     route.routes.map((route:IRoute) => (
-                        <Route key={route.path} {...route} render={props => !route.redirect ? <route.component {...props} /> : <Redirect to={route.redirect} />} exact={true}/>
+                        <Route key={route.path} {...{ ...route, component: undefined }} render={(props: any) => !route.redirect ? <route.component {...props} /> : <Redirect to={route.redirect} />} exact={true}/>
+
                     ))
                 }
             </Suspense>
@@ -91,7 +92,7 @@ export default () => (
         <Switch>
             {
                 routes.map((route, index) => {
-                    return (<RouteWithSubRoutes key={route.path} {...route} />)
+                    return (<RouteWithSubRoutes {...route} />)
                     }
                 )
             }
