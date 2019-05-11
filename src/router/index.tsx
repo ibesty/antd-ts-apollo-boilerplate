@@ -62,9 +62,9 @@ export let routes: IRoute[] = [
     },
 ];
 
-function RouteWithSubRoutes(route:IRoute) {
+function RouteWithSubRoutes(route:{key:string}&IRoute) {
     const children = (
-        <Switch key={route.path}>
+        <Switch>
             <Suspense fallback={<PageLoading/>}>
                 {
                     route.routes.map((route:IRoute) => (
@@ -79,7 +79,7 @@ function RouteWithSubRoutes(route:IRoute) {
     return (
         <Route
             path={route.path}
-            render={props => (
+            render={(props: any) => (
                 // pass the sub-routes down to keep nesting
                 <route.component {...props} children={children} menuData={route.routes} />
             )}
@@ -92,7 +92,7 @@ export default () => (
         <Switch>
             {
                 routes.map((route, index) => {
-                    return (<RouteWithSubRoutes {...route} />)
+                    return (<RouteWithSubRoutes key={route.path} {...route} />)
                     }
                 )
             }
