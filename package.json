@@ -20,7 +20,7 @@
     "customize-cra": "^0.2.12",
     "graphql": "^14.3.0",
     "nprogress": "^0.2.0",
-    "path-to-regexp": "^3.0.0",
+    "path-to-regexp": "^3.3.0",
     "react": "^16.8.6",
     "react-apollo": "^2.5.5",
     "react-app-rewired": "^2.1.3",
